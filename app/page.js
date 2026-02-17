@@ -9,7 +9,7 @@ import { Copy, Check } from "lucide-react"
 
 export default function Home() {
   const [question, setQuestion] = useState("");
-  const [link, setlink] = useState("https://applyo-project.vercel.app//poll/35b88e98-231b-4881-b136-2602fc081691")
+  const [link, setlink] = useState("")
   const [options, setOptions] = useState(["", ""]);
   const router = useRouter();
   const [copied, setCopied] = useState(false)

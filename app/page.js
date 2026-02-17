@@ -89,7 +89,7 @@ export default function Home() {
   return (
     <>
 
-      <div className="flex bg-blue-100 p-10 mx-auto w-[50vw] border rounded-2xl items-center justify-center my-[20vh] min-h-[50vh]">
+      <div className="flex bg-blue-100 p-4 md:p-10 mx-auto w-[95vw] md:w-[50vw] border rounded-2xl items-center justify-center my-[20vh] min-h-[50vh]">
         <div className="w-full">
 
           <h1 className="text-center text-3xl font-medium">Create a Poll</h1>

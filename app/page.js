@@ -9,6 +9,7 @@ import { Copy, Check } from "lucide-react"
 
 export default function Home() {
   const [question, setQuestion] = useState("");
+  const [creating, setCreating] = useState(false)
   const [link, setlink] = useState("")
   const [options, setOptions] = useState(["", ""]);
   const router = useRouter();
@@ -57,6 +58,7 @@ export default function Home() {
       alert("Poll cannot be created ")
     }
     try {
+      setCreating(true)
       const res = await fetch("api/poll/create", {
         method: "POST",
         headers: {
@@ -79,6 +81,8 @@ export default function Home() {
       console.error(error);
       alert("Error creating poll");
 
+    }finally{
+      setCreating(false)
     }
   }
 
@@ -142,7 +146,7 @@ export default function Home() {
               disabled={!isValidPoll}
               className="justify-end"
             >
-              Create Poll
+              {creating ? "Creating...":"Create Poll"}
             </Button>
           </div>
 

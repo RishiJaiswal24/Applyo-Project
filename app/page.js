@@ -75,7 +75,7 @@ export default function Home() {
       if (!res.ok) {
         alert(data.error || "Failed to create poll");
       }
-      setlink(`${process.env.NEXT_PUBLIC_URL}/poll/${data.pollId}`);
+      setlink(`${process.env.NEXT_PUBLIC_URL}poll/${data.pollId}`);
     } catch (error) {
 
       console.error(error);

@@ -79,11 +79,11 @@ export default function PollPage() {
             {poll.options.map(option => (
               <div key={option.id}>
                 <div className="h-3"></div>
-                <div className="cursor-pointer w-full flex justify-between bg-blue-300 px-2 rounded-3xl" onClick={() => vote(option.id)}>
+                <Button className="cursor-pointer w-full flex justify-between text-black bg-blue-300 hover:bg-blue-400 px-8 rounded-3xl" onClick={() => vote(option.id)}>
 
                   {option.text}
                   <span> Votes: {option.votes}</span>
-                </div>
+                </Button>
 
 
               </div>

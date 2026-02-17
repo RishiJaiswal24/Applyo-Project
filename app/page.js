@@ -4,11 +4,15 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card"
+import { Copy, Check } from "lucide-react"
 
 export default function Home() {
   const [question, setQuestion] = useState("");
+  const [link, setlink] = useState("https://applyo-project.vercel.app//poll/35b88e98-231b-4881-b136-2602fc081691")
   const [options, setOptions] = useState(["", ""]);
-  const router=useRouter();
+  const router = useRouter();
+  const [copied, setCopied] = useState(false)
   const isValidPoll =
     question.trim().length >= 10 &&
     options.length >= 2 &&
@@ -19,6 +23,18 @@ export default function Home() {
     newOptions[index] = value;
     setOptions(newOptions);
   };
+
+
+  
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(link)
+    setCopied(true)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+  }
 
   const addOption = () => {
     setOptions([...options, ""]);
@@ -57,7 +73,7 @@ export default function Home() {
       if (!res.ok) {
         alert(data.error || "Failed to create poll");
       }
-      router.push(`/poll/${data.pollId}`);
+      setlink(`${process.env.NEXT_PUBLIC_URL}/poll/${data.pollId}`);
     } catch (error) {
 
       console.error(error);
@@ -73,6 +89,26 @@ export default function Home() {
         <div className="w-full">
 
           <h1 className="text-center text-3xl font-medium">Create a Poll</h1>
+          {link.length>10 && (<Card className="w-full">
+            <CardContent className="flex items-center gap-2">
+              <Input
+                className="bg-blue-800 flex-1 cursor-pointer text-white"
+                value={link}
+                readOnly
+                onClick={handleCopy}
+              />
+
+              {/* Copy Button */}
+              <Button onClick={handleCopy} size="icon" variant="outline">
+                {copied ? (
+                  <Check className="h-4 w-4 text-green-500" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
+              </Button>
+
+            </CardContent>
+          </Card>)}
 
           <div className="h-5"></div>
           <h3>Question:</h3>
